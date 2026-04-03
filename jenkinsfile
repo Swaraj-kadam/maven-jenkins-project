@@ -6,28 +6,38 @@ pipeline {
   }
 
   stages {
-    stage('clone'){
+    stage('Clone') {
       steps {
-        git 'https://github.com/Swaraj-kadam/maven-jenkins-project.git'
+        git branch: 'main',
+            url: 'https://github.com/Swaraj-kadam/maven-jenkins-project.git'
       }
     }
 
-    stage('Build'){
+    stage('Build') {
       steps {
-        bat 'mvn clean compile'
+        sh 'mvn clean compile'
       }
     }
 
-    stage('Test'){
+    stage('Test') {
       steps {
-        bat 'mvn test'
+        sh 'mvn test'
       }
     }
 
-    stage('Package'){
+    stage('Package') {
       steps {
-        bat 'mvn package'
+        sh 'mvn package'
       }
+    }
+  }
+
+  post {
+    success {
+      echo 'Build successful!'
+    }
+    failure {
+      echo 'Build failed!'
     }
   }
 }
