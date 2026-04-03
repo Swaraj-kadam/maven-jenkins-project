@@ -6,12 +6,6 @@ pipeline {
   }
 
   stages {
-    stage('Clone') {
-      steps {
-        git 'https://github.com/Swaraj-kadam/maven-jenkins-project.git'
-      }
-    }
-
     stage('Build') {
       steps {
         bat 'mvn clean compile'
